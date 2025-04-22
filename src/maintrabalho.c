@@ -17,6 +17,8 @@ int main(){
 
     adicionaVagao(&lista, "AAAAA", "picas", 15656);
 
+    removerTrem(&lista , "OIII");
+    removerVagao(&lista, "AAAAA", "picas");
     
 
     printaLista(&lista);

@@ -22,4 +22,6 @@ typedef struct nose {
 void crialistaTrem(NoTrens **listaTrens);
 void adicionaTrem(NoTrens **listaTrens, char *nome);
 int adicionaVagao(NoTrens **listaTrens, char *nome, char *tipoCarga, int qtd);
-void printaLista(NoTrens **lista);
+void printaLista(NoTrens **listaTrens);
+void removerTrem(NoTrens **listaTrens, char *nome);
+void removerVagao(NoTrens **listaTrens, char* nomeTrem, char *nomeVagao);
