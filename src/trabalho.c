@@ -40,13 +40,13 @@ NoVagoes *criaVagao( char *tipo, int qtd){
 
 
 
-void adicionaVagao(NoTrens **listaTrens, char *nome, char *tipoCarga, int qtd){
+void adicionaVagaoInicio(NoTrens **listaTrens, char *nome, char *tipoCarga, int qtd){
     NoTrens *aux = *listaTrens;
     while(aux != NULL && (strcmp(aux->train, nome) != 0)){
         aux = aux->prox;
     }
     if(aux == NULL){
-        printf("O trem que possui o vagão nao pôde ser encontrado");
+        printf("O trem mencionado não pode ser encontrado encontrado");
         return;
     }else {
         NoVagoes *novo = criaVagao(tipoCarga, qtd);
@@ -61,6 +61,75 @@ void adicionaVagao(NoTrens **listaTrens, char *nome, char *tipoCarga, int qtd){
         
     }
 
+}
+
+void adicionarVagaoFinal(NoTrens **listaTrens, char *nome, char *tipoCarga, int qtd){
+    NoTrens *aux = *listaTrens;
+    while (aux != NULL && (strcmp(aux->train, nome) != 0))
+    {
+        aux = aux->prox;
+    } 
+    if (aux == NULL){
+        printf("O trem mencionado não pode ser encontrado");
+        return;
+    } else {
+        NoVagoes *auxVag = aux->vagoes;
+        NoVagoes *novo = criaVagao(tipoCarga, qtd);
+        if (auxVag == NULL)
+        {
+            aux->vagoes = novo;
+        } else {
+        while (auxVag->prox != NULL)
+        {
+            auxVag = auxVag->prox;
+        }
+        
+        novo->prox = auxVag->prox;
+        auxVag->prox = novo;
+        novo->ant = auxVag;
+    }
+        
+        
+
+    }
+    
+}
+
+void adicionarVagaoOrdenado(NoTrens **listaTrens, char *nome, char *tipoCarga, int qtd){
+    NoTrens *aux = *listaTrens;
+    while (aux != NULL && (strcmp(aux->train, nome) != 0))
+    {
+        aux = aux->prox;
+    } 
+    if (aux == NULL){
+        printf("O trem mencionado não pode ser encontrado");
+        return;
+    } else {
+        NoVagoes *novo = criaVagao(tipoCarga, qtd);
+        NoVagoes *auxVag = aux->vagoes;
+        NoVagoes *ant = NULL;
+        while (auxVag != NULL && (strcmp(auxVag->tipoCarga, tipoCarga) < 0))
+        {
+            ant = auxVag;
+            auxVag = auxVag->prox;
+        }
+
+        novo->prox = auxVag;
+        novo->ant = ant;
+
+        if(ant == NULL){
+            aux->vagoes = novo;
+        }else {
+            ant->prox = novo;
+        }
+        if (auxVag != NULL)
+        {
+            auxVag->ant = novo;
+        }
+        
+        
+
+    }
 }
 
 
@@ -139,7 +208,9 @@ void removerVagao(NoTrens **listaTrens, char* nomeTrem, char *nomeVagao){
             free (auxVag);
         }else {
             
+            if(auxVag->ant != NULL)
             auxVag->ant->prox = auxVag->prox;
+            if (auxVag->prox !=NULL)
             auxVag->prox->ant = auxVag->ant;
 
 
@@ -175,3 +246,6 @@ void printaLista(NoTrens **listaTrens){
         
     }
 }
+
+
+
