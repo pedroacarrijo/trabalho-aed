@@ -29,6 +29,34 @@ void adicionaTrem(NoTrens **listaTrens, char *nome){
 
 }
 
+void adicionarTremOrdenado(NoTrens **listaTrens, char *nome){
+    NoTrens *novo;
+    novo = criaTrem(nome);
+    if (*listaTrens != NULL)
+    {
+        NoTrens *aux = *listaTrens;
+    
+    while (aux->prox != NULL && (strcmp(novo->train, aux->train) > 0 ))
+    {
+        aux = aux->prox;
+    }
+    if ( (aux == *listaTrens && (strcmp(novo->train, aux->train) <= 0)))
+    {
+        novo->prox = aux;
+        *listaTrens = novo;
+    } else {
+        novo->prox = aux->prox;
+        aux->prox = novo;
+    }
+    } else {
+        novo->prox = *listaTrens;
+        *listaTrens = novo;
+    }
+    
+    
+    
+}
+
 NoVagoes *criaVagao( char *tipo, int qtd){
     NoVagoes *novo = (NoVagoes *) malloc(sizeof(NoVagoes));
     strcpy(novo->tipoCarga, tipo);
@@ -220,6 +248,106 @@ void removerVagao(NoTrens **listaTrens, char* nomeTrem, char *nomeVagao){
     }
     
 
+}
+
+void TrocarVagoesEntreTrens(NoTrens **listaTrens, char *nomeTrem1, char *nomeTrem2, char *nomeVagao1, char* nomeVagao2){
+    if(*listaTrens != NULL){
+    NoTrens *aux1 = *listaTrens;
+    NoTrens *aux2 = *listaTrens;
+    while (aux1 != NULL && (strcmp(aux1->train, nomeTrem1) != 0))
+    {
+        aux1 = aux1->prox;
+    }
+    while (aux2 != NULL && (strcmp(aux2->train, nomeTrem2) != 0))
+    {
+        aux2 = aux2->prox;
+    }
+
+    if (aux1 == NULL  || aux2 == NULL)
+    {
+        printf("Não foi possivel encontrar um dos trens desejados, verifique novamente a lista de trens disponíveis !");
+        return;
+    }
+
+    NoVagoes *temp,  *auxVagao1, *auxVagao2, *prox1, *prox2, *ant1, *ant2;
+    
+    auxVagao1 = aux1->vagoes;
+    auxVagao2 = aux2->vagoes;
+
+    while (auxVagao1 != NULL && (strcmp(auxVagao1->tipoCarga, nomeVagao1) != 0))
+    {
+       auxVagao1 = auxVagao1->prox;
+    }
+    
+
+    while (auxVagao2 != NULL && (strcmp(auxVagao2->tipoCarga, nomeVagao2) != 0))
+    {
+       auxVagao2 = auxVagao2->prox;
+    }
+
+    if (auxVagao1 == NULL || auxVagao2 == NULL)
+    {
+        printf("Não foi possivel encontrar um dos vagões mencionados, verifique novamente a lista!");
+        return;
+    }
+
+    prox1 = auxVagao1->prox;
+    prox2 = auxVagao2->prox;
+
+    ant1 = auxVagao1->ant;
+    ant2 = auxVagao2->ant;
+
+    if (aux1->train == auxVagao1)
+    {
+        aux1->train = auxVagao2;
+    }
+
+    if (aux2->train == auxVagao2)
+    {
+        aux2->train = auxVagao1;
+    }
+    
+    
+
+    
+
+    if (ant1 != NULL)
+    {
+        ant1->prox = auxVagao2;
+    }
+
+    if (ant2 != NULL)
+    {
+        ant2->prox = auxVagao1;
+    }
+
+
+    if (prox1 != NULL)
+    {
+        prox1->ant = auxVagao2;
+    }
+
+    if (prox2 != NULL)
+    {
+        prox2->ant = auxVagao1;
+    }
+    
+    auxVagao1->ant = ant2;
+    auxVagao1->prox = prox2;
+
+    auxVagao2->ant = ant1;
+    auxVagao2->prox = prox2;
+
+    
+
+    
+
+    } else {
+        printf("Lista vazia!");
+        return;
+    }
+    
+    
 }
 
 

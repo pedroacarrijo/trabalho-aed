@@ -27,3 +27,4 @@ void removerTrem(NoTrens **listaTrens, char *nome);
 void removerVagao(NoTrens **listaTrens, char* nomeTrem, char *nomeVagao);
 void adicionarVagaoFinal(NoTrens **listaTrens, char *nome, char *tipoCarga, int qtd);
 void adicionarVagaoOrdenado(NoTrens **listaTrens, char *nome, char *tipoCarga, int qtd);
+void adicionarTremOrdenado(NoTrens **listaTrens, char *nome);

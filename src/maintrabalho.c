@@ -7,13 +7,13 @@ int main(){
 
     NoTrens *lista;
     crialistaTrem(&lista);
-    adicionaTrem(&lista, "OIII");
+    adicionarTremOrdenado(&lista, "Trem Vermelho");
     adicionarVagaoOrdenado(&lista, "OIII", "madeira", 100);
     adicionarVagaoOrdenado(&lista, "OIII", "ferro", 100);
     adicionarVagaoOrdenado(&lista, "OIII", "carne", 100);
     adicionarVagaoOrdenado(&lista, "OIII", "pica", 100);
-    adicionaTrem(&lista, "AAAAA");
-    adicionaTrem(&lista, "BBBBB");
+    adicionarTremOrdenado(&lista, "Trem Azul");
+    adicionarTremOrdenado(&lista, "Trem Azul");
 
     adicionarVagaoOrdenado(&lista, "AAAAA", "picas", 15656);
 
