@@ -297,14 +297,14 @@ void TrocarVagoesEntreTrens(NoTrens **listaTrens, char *nomeTrem1, char *nomeTre
     ant1 = auxVagao1->ant;
     ant2 = auxVagao2->ant;
 
-    if (aux1->train == auxVagao1)
+    if (aux1->vagoes == auxVagao1)
     {
-        aux1->train = auxVagao2;
+        aux1->vagoes = auxVagao2;
     }
 
-    if (aux2->train == auxVagao2)
+    if (aux2->vagoes == auxVagao2)
     {
-        aux2->train = auxVagao1;
+        aux2->vagoes = auxVagao1;
     }
     
     
