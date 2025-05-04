@@ -29,6 +29,28 @@ void adicionaTrem(NoTrens **listaTrens, char *nome){
 
 }
 
+void adicionaTremFinal(NoTrens **listaTrens, char *nome){
+    NoTrens *novo = criaTrem(nome);
+    if( *listaTrens == NULL){
+        novo->prox = *listaTrens;
+        *listaTrens = novo;
+    } else {
+        NoTrens *aux = *listaTrens;
+        while (aux->prox != NULL)
+        {
+            aux = aux->prox;
+        }
+
+        novo->prox = aux->prox;
+        aux->prox = novo;
+
+        
+    }
+
+
+
+}
+
 void adicionarTremOrdenado(NoTrens **listaTrens, char *nome){
     NoTrens *novo;
     novo = criaTrem(nome);
@@ -74,7 +96,7 @@ void adicionaVagaoInicio(NoTrens **listaTrens, char *nome, char *tipoCarga, int 
         aux = aux->prox;
     }
     if(aux == NULL){
-        printf("O trem mencionado não pode ser encontrado encontrado");
+        printf("O trem mencionado não pode ser encontrado  \n");
         return;
     }else {
         NoVagoes *novo = criaVagao(tipoCarga, qtd);
@@ -98,7 +120,7 @@ void adicionarVagaoFinal(NoTrens **listaTrens, char *nome, char *tipoCarga, int 
         aux = aux->prox;
     } 
     if (aux == NULL){
-        printf("O trem mencionado não pode ser encontrado");
+        printf("O trem mencionado não pode ser encontrado \n");
         return;
     } else {
         NoVagoes *auxVag = aux->vagoes;
@@ -130,7 +152,7 @@ void adicionarVagaoOrdenado(NoTrens **listaTrens, char *nome, char *tipoCarga, i
         aux = aux->prox;
     } 
     if (aux == NULL){
-        printf("O trem mencionado não pode ser encontrado");
+        printf("O trem mencionado não pode ser encontrado \n");
         return;
     } else {
         NoVagoes *novo = criaVagao(tipoCarga, qtd);
@@ -164,7 +186,13 @@ void adicionarVagaoOrdenado(NoTrens **listaTrens, char *nome, char *tipoCarga, i
 
 
 void removerTrem(NoTrens **listaTrens, char *nome){
-    NoTrens *aux = *listaTrens;
+    if (*listaTrens == NULL)
+    {
+        printf("A lista de trens está vazia! \n");
+
+        return;
+    } else{
+        NoTrens *aux = *listaTrens;
     NoTrens *ant = NULL;
     while (aux != NULL && (strcmp(aux->train, nome) != 0))
     {
@@ -178,7 +206,7 @@ void removerTrem(NoTrens **listaTrens, char *nome){
         *listaTrens = (*listaTrens)->prox;
         
     } else if( aux == NULL){
-       printf("O trem mencionado não está listado");
+       printf("O trem mencionado não está listado \n");
         return;
     } 
     else {
@@ -195,6 +223,8 @@ void removerTrem(NoTrens **listaTrens, char *nome){
 
     free(aux);
     
+    }
+    
     
     
 }
@@ -208,7 +238,7 @@ void removerVagao(NoTrens **listaTrens, char* nomeTrem, char *nomeVagao){
     
     if (aux == NULL)
     {
-        printf("O trem mencionado não está listado");
+        printf("O trem mencionado não está listado \n");
         return;
     } else {
         NoVagoes *auxVag = aux->vagoes;
@@ -220,7 +250,7 @@ void removerVagao(NoTrens **listaTrens, char* nomeTrem, char *nomeVagao){
         }
 
         if(auxVag == NULL){
-            printf("O vagao mencionado não está no trem: %s", aux->train);
+            printf("O vagao mencionado não está no trem: %s \n", aux->train);
             return;
         
         } else if( auxVag == aux->vagoes){
@@ -265,7 +295,7 @@ void TrocarVagoesEntreTrens(NoTrens **listaTrens, char *nomeTrem1, char *nomeTre
 
     if (aux1 == NULL  || aux2 == NULL)
     {
-        printf("Não foi possivel encontrar um dos trens desejados, verifique novamente a lista de trens disponíveis !");
+        printf("Não foi possivel encontrar um dos trens desejados, verifique novamente a lista de trens disponíveis ! \n");
         return;
     }
 
@@ -343,7 +373,7 @@ void TrocarVagoesEntreTrens(NoTrens **listaTrens, char *nomeTrem1, char *nomeTre
     
 
     } else {
-        printf("Lista vazia!");
+        printf("Lista vazia! \n");
         return;
     }
     
@@ -357,6 +387,12 @@ void TrocarVagoesEntreTrens(NoTrens **listaTrens, char *nomeTrem1, char *nomeTre
 
 void printaLista(NoTrens **listaTrens){
     NoTrens *aux = *listaTrens;
+    if (aux == NULL)
+    {
+        printf("Lista vazia! \n");
+        return;
+    }
+    
     
     while(aux != NULL){
         printf("Nome do trem: %s\n", aux->train );
