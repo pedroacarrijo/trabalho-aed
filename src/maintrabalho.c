@@ -40,6 +40,13 @@ int main(){
             printf("Deseja adicionar em ordem alfabetica: \n Digite 's' ou 'n' para sim ou nao, respectivamente!\n");
             fflush(stdin);
             scanf("%c", &c);
+            while (c != 's' && c != 'n')
+            {
+                fflush(stdin);
+                printf("Escolha uma opção valida:\n");
+                scanf("%c", &c);
+                
+            }
             if (c == 's')
             {
             adicionarTremOrdenado(&lista, nomeTrem);
@@ -47,6 +54,14 @@ int main(){
             printf("Deseja adicionar no inicio ou final da lista \n 'f' - Final \n 'i' - inicio \n ");
             fflush(stdin);
             scanf("%c", &c);
+            while (c != 'i' && c != 'f')
+            {
+                fflush(stdin);
+                printf("Escolha uma opção valida:\n");
+                scanf("%c", &c);
+                
+            }
+            
             if (c == 'i')
             {
                 adicionaTrem(&lista, nomeTrem);
@@ -71,6 +86,14 @@ int main(){
         printf("Deseja adicionar em ordem alfabetica: \n Digite 's' ou 'n' para sim ou nao, respectivamente!\n");
         fflush(stdin);
         scanf("%c", &c);
+        
+        while (c != 's' && c != 'n')
+            {
+                fflush(stdin);
+                printf("Escolha uma opção valida:\n");
+                scanf("%c", &c);
+                
+            }
         if (c == 's')
         {
             adicionarVagaoOrdenado(&lista, nomeTrem, nomeVagao, qtdCarga);
@@ -78,6 +101,13 @@ int main(){
             printf("Deseja adicionar no inicio ou final da lista \n 'f' - Final \n 'i' - inicio\n");
             fflush(stdin);
             scanf("%c", &c);
+            while (c != 'i' && c != 'f')
+            {
+                fflush(stdin);
+                printf("Escolha uma opção valida:\n");
+                scanf("%c", &c);
+                
+            }
             if (c == 'i')
             {
                 adicionaVagaoInicio(&lista, nomeTrem, nomeVagao, qtdCarga);
