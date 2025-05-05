@@ -58,7 +58,7 @@ void adicionarTremOrdenado(NoTrens **listaTrens, char *nome){
     {
         NoTrens *aux = *listaTrens;
     
-    while (aux->prox != NULL && (strcmp(novo->train, aux->train) > 0 ))
+    while (aux->prox != NULL && (strcmp(novo->train, aux->prox->train) > 0 ))
     {
         aux = aux->prox;
     }
